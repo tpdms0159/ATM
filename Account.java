@@ -36,3 +36,4 @@ public class Account extends RegularAccount {//정기예금 계좌 상속받고 
 
     }
 }
+
