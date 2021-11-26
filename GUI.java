@@ -13,7 +13,7 @@ public class GUI {
     private int oneAmount;
     private ATM transaction = new ATM();
     boolean loginBool = false;
-    int deposit_withdraw = 0;
+    private int deposit_withdraw = 0;
 
 
     private String accountNumber = ""; // 사용자가 입력하는 계좌번호 저장
@@ -30,13 +30,13 @@ public class GUI {
     }
 
 
-    Font font_all = new Font("궁서 굵게", Font.BOLD, 30);
+    Font font_all = new Font("Agency FB", Font.BOLD, 30);
 
-    JFrame atm = new JFrame("ATM SYSTEM");
+
     //모든 frame에 들어가는 panel
+    JFrame atm = new JFrame("ATM SYSTEM");
     JPanel atm_label = new JPanel();
-    JLabel label = new JLabel("K 은행 ATM");
-
+    JLabel label = new JLabel("K Bank ATM");
 
     // 계좌 별 메뉴를 구성하는 panel
     JPanel login = new JPanel(); // 로그인 패널
@@ -45,8 +45,6 @@ public class GUI {
     JPanel menu_manager = new JPanel(); // 관리자 패널
     JPanel menu_error_page = new JPanel(); // 로그인 에러 패널
     JPanel money_cnt_error = new JPanel(); // 지폐 수 입력 에러 패널
-
-
 
     // 입금 & 출금 입력받기
     // 입금 & 출금 입력확인
@@ -57,7 +55,6 @@ public class GUI {
     JPanel deposit_user_show_finish = new JPanel(); // 입금 완료 후 잔고 & 입금금액 출력
 
     //출금 과정에서 나타나는 panel
-
     JPanel withdraw_user_show_finish = new JPanel(); // 출금 완료 후 잔고 & 출금금액 출력
     JPanel withdraw_user_moneyOneFive_error = new JPanel(); // atm 지폐 수 1만원권 & 5만원권 부족 error
     JPanel withdraw_user_moneyone_error = new JPanel(); //atm 지폐 수 1만원권 부족 error
@@ -71,19 +68,15 @@ public class GUI {
     JPanel manager_user_input = new JPanel(); // 사용자 입력 받기
     JPanel manager_user_show_finish = new JPanel(); // 초기화 완료 후 출력
 
-
     //JButton & JLabel & JTextfield 정의
-
     //deposit_user_input
     JTextField one_text = new JTextField(20);
     JTextField five_text = new JTextField(20);
-    //입력 불가능하게 수정 필요 -- not clear
 
     //deposit_user_show_input
     JTextField text_user_input_one_show = new JTextField(10);
     JTextField text_user_input_five_show = new JTextField(10);
     JTextField text_user_input_total_show = new JTextField(20);
-
     //deposit_user_show_finish
     JTextField text_deposit_id_finish = new JTextField(20);
     JTextField text_deposit_money_finish = new JTextField(20);
@@ -91,7 +84,6 @@ public class GUI {
     //withdraw_user_input
     JTextField text_withdraw_user_one = new JTextField(20);
     JTextField text_withdraw_user_five = new JTextField(20);
-    //입력 불가능하게 수정 필요 -- not clear
     //withdraw_user_show_input
     JTextField text_withdraw_one_show = new JTextField(10);
     JTextField text_withdraw_five_show = new JTextField(10);
@@ -111,16 +103,13 @@ public class GUI {
         atm.setSize(400, 250);
         atm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        atm.getContentPane().setBackground(Color.cyan);
         //모든 frame에 들어가는 panel
+        label.setFont(font_all);
         atm_label.add(label);
         atm.add(atm_label);
 
-
-        //login panel 설정
-        login.setSize(500, 400);
-
         //모든 panel 수직 정렬 설정 // 이게 맞나..?
+        //로그인 및 메뉴
         login.setLayout(new BoxLayout(login, BoxLayout.Y_AXIS));
         menu_withdraw.setLayout(new BoxLayout(menu_withdraw, BoxLayout.Y_AXIS));
         menu_manager.setLayout(new BoxLayout(menu_manager, BoxLayout.Y_AXIS));
@@ -128,18 +117,20 @@ public class GUI {
         menu_error_page.setLayout(new BoxLayout(menu_error_page, BoxLayout.Y_AXIS));
         money_cnt_error.setLayout(new BoxLayout(money_cnt_error, BoxLayout.Y_AXIS));
 
+        //지폐 수 입력 및 보여주기
         user_input.setLayout(new BoxLayout(user_input, BoxLayout.Y_AXIS));
         user_input_show.setLayout(new BoxLayout(user_input_show, BoxLayout.Y_AXIS));
-
+        //입금 완료
         deposit_user_show_finish.setLayout(new BoxLayout(deposit_user_show_finish, BoxLayout.Y_AXIS));
-
+        //출금 완료 및 에러
         withdraw_user_balance_error.setLayout(new BoxLayout(withdraw_user_balance_error, BoxLayout.Y_AXIS));
         withdraw_user_moneyone_error.setLayout(new BoxLayout(withdraw_user_moneyone_error, BoxLayout.Y_AXIS));
         withdraw_user_moneyfive_error.setLayout(new BoxLayout(withdraw_user_moneyfive_error, BoxLayout.Y_AXIS));
+        withdraw_user_moneyOneFive_error.setLayout(new BoxLayout(withdraw_user_moneyOneFive_error, BoxLayout.Y_AXIS));
         withdraw_user_show_finish.setLayout(new BoxLayout(withdraw_user_show_finish, BoxLayout.Y_AXIS));
-
+        //잔고조회
         balance_user_show.setLayout(new BoxLayout(balance_user_show, BoxLayout.Y_AXIS));
-
+        //관리자
         manager_user_input.setLayout(new BoxLayout(manager_user_input, BoxLayout.Y_AXIS));
         manager_user_show_finish.setLayout(new BoxLayout(manager_user_show_finish, BoxLayout.Y_AXIS));
 
@@ -159,7 +150,6 @@ public class GUI {
         text_balance_balance.setEditable(false);
         text_balance_id.setEditable(false);
 
-
 //로그인 panel
         //id panel 설정
         JPanel id = new JPanel();
@@ -176,7 +166,6 @@ public class GUI {
         pass.add(new JLabel("Password"));
         pass.add(pass_text);
         pass_text.setEchoChar('*');
-
 
         //확인 버튼 panel 생성
         JButton menu_ok_btn = new JButton("확인");
@@ -197,7 +186,7 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
-            }
+            } // 종료 버튼 선택시 프로그램 종료
         });
 
         menu_ok_btn.addActionListener(new ActionListener() {
@@ -205,7 +194,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 login.setVisible(false); //  다른 panel로 전환
 
-                //ID or Password 제약 조건 / id 길이 13자리 이상, password 길이 4자리 이상, password 문자 들어올시
+                //ID or Password 제약 조건 / id 길이 13자리 이상, password 길이 4자리 이상, password 문자 들어올 시
                 if (id_text.getText().length() > 13 || pass_text.getText().length() > 4) {
                     menu_error_page.setVisible(true);
                 }
@@ -244,13 +233,10 @@ public class GUI {
                         }
                     } else { // 로그인 정보가 일치하지 않을 때
                         //에러 panel
-                        System.out.println("errrrr");
                         menu_error_page.setVisible(true);
                     }
                 }
-
             }
-
         });
 
 //입출금 패널
@@ -258,7 +244,6 @@ public class GUI {
         JButton btn_withdraw = new JButton("출금");
         JButton btn_balance = new JButton("잔고조회");
         JButton btn_exit = new JButton("종료");
-
 
         JPanel first = new JPanel();
         first.add(btn_deposit);
@@ -268,8 +253,7 @@ public class GUI {
         second.add(btn_balance);
         second.add(btn_exit);
 
-        menu_withdraw.add(first);
-        menu_withdraw.add(second);
+
 
         btn_deposit.addActionListener(new ActionListener() {
             @Override
@@ -286,9 +270,7 @@ public class GUI {
                 menu_withdraw.setVisible(false);
                 user_input.setVisible(true);
                 deposit_withdraw = 2;
-
             }
-
         });
         btn_balance.addActionListener(new ActionListener() {
             @Override
@@ -303,9 +285,10 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 menu_withdraw.setVisible(false);
                 login.setVisible(true);
-                System.out.println(4);
             }
         });
+        menu_withdraw.add(first);
+        menu_withdraw.add(second);
         atm.add(menu_withdraw);
         menu_withdraw.setVisible(false);
 
@@ -355,10 +338,11 @@ public class GUI {
                 login.setVisible(true);
             }
         });
+
         panel_manager.add(btn_maneger_reset);
         panel_manager.add(btn_manager_exit);
-        menu_manager.add(panel_manager);
 
+        menu_manager.add(panel_manager);
         atm.add(menu_manager);
         menu_manager.setVisible(false);
 
@@ -370,12 +354,8 @@ public class GUI {
         error_label.add(new JLabel("로그인 정보가 일치하지 않습니다."));
         error_label2.add(new JLabel("다시 입력해주세요!"));
 
-
         JButton btn_error_back = new JButton("확인");
         error_btn.add(btn_error_back);
-        menu_error_page.add(error_label);
-        menu_error_page.add(error_label2);
-        menu_error_page.add(error_btn);
 
         btn_error_back.addActionListener(new ActionListener() {
             @Override
@@ -384,6 +364,10 @@ public class GUI {
                 login.setVisible(true);
             }
         });
+        menu_error_page.add(error_label);
+        menu_error_page.add(error_label2);
+        menu_error_page.add(error_btn);
+
         atm.add(menu_error_page);
         menu_error_page.setVisible(false);
 // 지폐 수 입력 오류 panel
@@ -404,7 +388,6 @@ public class GUI {
                 user_input.setVisible(true);
             }
         });
-
         panel_monuy_range_btn.add(btn_money_range_back);
         money_cnt_error.add(panel_money_range_label);
         money_cnt_error.add(panel_money_range_label2);
@@ -445,28 +428,24 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 user_input.setVisible(false);
-                //제약 조건 / 지폐 수 입력 오류 확인
 
+                //제약 조건 / 지폐 수 입력 오류 확인
                 if (one_text.getText().length() > 0 && one_text.getText().length() < 9 && five_text.getText().length() > 0 && five_text.getText().length() < 9) {
                     fiveAmount = Integer.parseInt(five_text.getText());
                     oneAmount = Integer.parseInt(one_text.getText());
                     amount = fiveAmount * 50000 + oneAmount * 10000;
-                    // deposit 입려 시 / 입금 최종
-
+                    //input_show textField 설정 및 finish textField 설정
                     text_user_input_one_show.setText(Integer.toString(oneAmount));
                     text_user_input_five_show.setText(Integer.toString(fiveAmount));
                     text_deposit_money_finish.setText(Integer.toString(amount));
                     text_withdraw_money_finish.setText(Integer.toString(amount));
                     text_user_input_total_show.setText(Integer.toString(amount));
                     user_input_show.setVisible(true);
-                }
-                else {
-                    money_cnt_error.setVisible(true);
-                }
+                } else {money_cnt_error.setVisible(true);}
+
                 one_text.setText("");
                 five_text.setText("");
             }
-
         });
 
         atm.add(user_input);
@@ -493,7 +472,7 @@ public class GUI {
                 user_input_show.setVisible(false);
                 int balance = transaction.CheckBalance();
 
-                // ATMTransaction에서 입금 부분 call
+                // 입금 및 출금 진행
                 if (deposit_withdraw == 1) {
                     transaction.Deposit(fiveAmount, oneAmount);
                     // 입금 완료 후의 금액 출력
@@ -502,9 +481,9 @@ public class GUI {
                     text_deposit_balance_finish.setText(Integer.toString(transaction.CheckBalance()));
                     deposit_user_show_finish.setVisible(true);
                 } else if (deposit_withdraw == 2) {
-                    if (transaction.CheckWithdrawFive(fiveAmount) || transaction.CheckWithdrawOne(oneAmount)) // ATM기에 오만원권의 수가 충분한지 확인
+                    if (transaction.CheckWithdrawFive(fiveAmount) || transaction.CheckWithdrawOne(oneAmount)) // ATM기에 오만원 & 만원권의 수가 충분한지 확인
                     {
-                        if (transaction.CheckWithdrawOne(oneAmount) && transaction.CheckWithdrawFive(fiveAmount)) // ATM기에 만원권의 수가 충분한지 확인
+                        if (transaction.CheckWithdrawOne(oneAmount) && transaction.CheckWithdrawFive(fiveAmount)) // ATM기에 오만원 & 만원권의 수가 충분한 경우
                         {
                             if (transaction.Withdraw(amount)) // 출금하려는 금액이 잔고보다 큰지 확인
                             {
@@ -517,17 +496,17 @@ public class GUI {
                                 user_input_show.setVisible(false);
                                 withdraw_user_show_finish.setVisible(false);
                             }
-//                    System.out.println("계좌의 잔액이 부족합니다.");
                         } else {
-                            user_input.setVisible(false);
-                            user_input_show.setVisible(false);
+//                            user_input.setVisible(false);
+//                            user_input_show.setVisible(false);
 
                             if (transaction.CheckWithdrawFive(fiveAmount)){withdraw_user_moneyone_error.setVisible(true);}
                             else{withdraw_user_moneyfive_error.setVisible(true);}
 
                         }
                     }
-                    else{user_input.setVisible(false);
+                    else{
+                        user_input.setVisible(false);
                         user_input_show.setVisible(false);
                         withdraw_user_moneyOneFive_error.setVisible(true);
                     }
@@ -613,6 +592,8 @@ public class GUI {
         panel_withdraw_user_money_OneFive_error_label.add(new JLabel("1만원권과 5만원권의 지폐 수가 부족합니다."));
 
         JButton btn_withdraw_user_money_OneFive_error = new JButton("확인");
+        panel_withdraw_user_money_OneFive_error_btn.add(btn_withdraw_user_money_OneFive_error);
+
         btn_withdraw_user_money_OneFive_error.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -620,7 +601,6 @@ public class GUI {
                 user_input.setVisible(true);
             }
         });
-
         withdraw_user_moneyOneFive_error.add(panel_withdraw_user_money_OneFive_error_label);
         withdraw_user_moneyOneFive_error.add(panel_withdraw_user_money_OneFive_error_btn);
 
@@ -650,13 +630,9 @@ public class GUI {
 
 //출금 지폐 수 5만원권 부족 error / withdraw_user_moneyfive_error
         JPanel panel_withdraw_moneyfive_error = new JPanel();
-        // JPanel panel_withdraw_moneyfive_btn = new JPanel();
-        //panel_withdraw_moneyfive_error.add(new JLabel("ERROR"));
-
         panel_withdraw_moneyfive_error.add(new JLabel("ATM에 5만원권이 부족합니다."));
 
         JButton btn_withdraw_moneyfive_error = new JButton("확인");
-        // panel_withdraw_moneyfive_btn.add(btn_withdraw_money_error);
 
         btn_withdraw_moneyfive_error.addActionListener(new ActionListener() {
             @Override
@@ -702,7 +678,6 @@ public class GUI {
         panel_withdraw_money_finish.add(new JLabel("출금금액\t\t\t "));
         panel_withdraw_balance_finish.add(new JLabel("잔고\t\t\t"));
 
-
         panel_withdraw_id_finish.add(text_withdraw_id_finish);
         panel_withdraw_money_finish.add(text_withdraw_money_finish);
         panel_withdraw_balance_finish.add(text_withdraw_balance_finish);
@@ -727,7 +702,6 @@ public class GUI {
                 menu_withdraw.setVisible(true);
             }
         });
-
         withdraw_user_show_finish.add(panel_withdraw_id_finish);
         withdraw_user_show_finish.add(panel_withdraw_money_finish);
         withdraw_user_show_finish.add(panel_withdraw_balance_finish);
@@ -757,7 +731,6 @@ public class GUI {
         panel_balance_id.add(text_balance_id);
         panel_balance_balance.add(new JLabel("잔고"));
         panel_balance_balance.add(text_balance_balance);;
-
 
         balance_user_show.add(panel_balance_id);
         balance_user_show.add(panel_balance_balance);
@@ -789,17 +762,6 @@ public class GUI {
                 manager_user_input.setVisible(false);
                 manager_user_show_finish.setVisible(true);
                 transaction.Reset();
-//                System.out.println("\nATM 기기 금액을 초기화하겠습니까? (0: 예, 1: 아니오)");
-//                String selection = scan.nextLine();
-//
-//                if (selection.equals("0")) {
-//                    transaction.Reset();
-//                    // reset panel 설정
-//                    System.out.println("ATM 기기 금액을 초기화했습니다.");
-//                } else {
-//                    transaction.Nothing();
-//                }
-//
             }
         });
         panel_manager_input_btn.add(btn_manager_back);
@@ -827,46 +789,11 @@ public class GUI {
                 menu_manager.setVisible(true);
             }
         });
-
         manager_user_show_finish.add(panel_manager_show_finish_label);
         manager_user_show_finish.add(panel_manager_show_finish_label2);
         manager_user_show_finish.add(panel_manager_finish_btn);
+
         atm.add(manager_user_show_finish);
         manager_user_show_finish.setVisible(false);
-
-// 모든 panel 정의 완료
-
-
-        System.out.println("panel");
     }
-// 로그인 정보 확인한 후 페이지 변경 & 버튼 입력 후 부터 정보 확인 start
-
-
-//    void MenuSelectwindow() { // 입출금계좌 로그인 성공 했을 시
-
-//        while (true) {// 로그아웃 이전까지 무한 반복
-//            Scanner scan = new Scanner(System.in);
-//
-//            System.out.println("\n업무를 선택해주세요. (0: 입금, 1: 출금, 2: 잔액확인, 3: 로그아웃)");
-//
-//
-//            if(select_work == 3) { // 로그아웃
-//                transaction.Logout(); // DB에 데이터 저장
-//                end = true; // 로그아웃 정보 확인
-//                break;
-//            }
-//            // 입금
-//            else if(select_work == 0) { Deposit(); }
-//            // 출금
-//            else if(select_work == 1) { Withdraw(); }
-//            // 잔고조회
-//            else if(select_work == 2) { System.out.println("잔액 : " + transaction.CheckBalance()); }
-//            //로그인 정보 불일치
-//            else { System.out.println("잘못된 입력입니다. 다시 입력해주세요."); }
-//        }
-//    }
-//
-
-
-
 }
