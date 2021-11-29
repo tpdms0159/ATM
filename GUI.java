@@ -207,33 +207,32 @@ public class GUI {
                     } catch (NumberFormatException event) {
                         password = Integer.parseInt("0");
                     }
-                }
-                id_text.setText("");
-                pass_text.setText("");
 
-                //계좌번호 & 비밀번호 값 받아오기
-                if (!accountNumber.equals("-1") && accountNumber.length() == 13) {
-                    loginBool = transaction.Login(accountNumber, password);
+                    id_text.setText("");
+                    pass_text.setText("");
 
-                    //입출금 계좌 메뉴 선택
-                    System.out.println(loginBool);
-                    text_deposit_id_finish.setText(accountNumber);
-                    text_withdraw_id_finish.setText(accountNumber);
-                    text_balance_id.setText(accountNumber);
+                    //계좌번호 & 비밀번호 값 받아오기
+                    if (!accountNumber.equals("-1") && accountNumber.length() == 13) {
+                        loginBool = transaction.Login(accountNumber, password);
 
-                    if (loginBool) { // 로그인 성공시 진행
-                        System.out.println("go");
-                        if (accountNumber.charAt(0) == '1') { // 입출금 계좌 = 사용자 계좌
-                            menu_withdraw.setVisible(true);
-                        } else if (accountNumber.charAt(0) == '2') { // 정기예금계좌 = 사용자 계좌
-                            //정기예금 계좌 panel
-                            menu_regular.setVisible(true);
-                        } else if (accountNumber.charAt(0) == '0') { // 관리자 계좌 = 사용자 계좌
-                            menu_manager.setVisible(true);
+                        //입출금 계좌 메뉴 선택
+                        text_deposit_id_finish.setText(accountNumber);
+                        text_withdraw_id_finish.setText(accountNumber);
+                        text_balance_id.setText(accountNumber);
+
+                        if (loginBool) { // 로그인 성공시 진행
+                            if (accountNumber.charAt(0) == '1') { // 입출금 계좌 = 사용자 계좌
+                                menu_withdraw.setVisible(true);
+                            } else if (accountNumber.charAt(0) == '2') { // 정기예금계좌 = 사용자 계좌
+                                //정기예금 계좌 panel
+                                menu_regular.setVisible(true);
+                            } else if (accountNumber.charAt(0) == '0') { // 관리자 계좌 = 사용자 계좌
+                                menu_manager.setVisible(true);
+                            }
+                        } else { // 로그인 정보가 일치하지 않을 때
+                            //에러 panel
+                            menu_error_page.setVisible(true);
                         }
-                    } else { // 로그인 정보가 일치하지 않을 때
-                        //에러 panel
-                        menu_error_page.setVisible(true);
                     }
                 }
             }
@@ -608,10 +607,15 @@ public class GUI {
         withdraw_user_moneyOneFive_error.setVisible(false);
 //출금 withdraw_user_moneyone_error
         JPanel panel_withdraw_money_error = new JPanel();
+        JPanel panel_withdraw_money_error_label = new JPanel();
+        JPanel panel_withdraw_money_error_btn = new JPanel();
+
+        panel_withdraw_money_error_label.add(new JLabel("ERROR"));
         //  JPanel panel_withdraw_moneyone_btn = new JPanel();
         panel_withdraw_money_error.add(new JLabel("ATM에 1만원권이 부족합니다."));
 
         JButton btn_withdraw_money_error = new JButton("확인");
+        panel_withdraw_money_error_btn.add(btn_withdraw_money_error);
         //  panel_withdraw_moneyone_btn.add(btn_withdraw_money_error);
         btn_withdraw_money_error.addActionListener(new ActionListener() {
             @Override
@@ -620,9 +624,9 @@ public class GUI {
                 user_input.setVisible(true);
             }
         });
-        withdraw_user_moneyone_error.add(new JLabel("ERROR"));
+        withdraw_user_moneyone_error.add(panel_withdraw_money_error_label);
         withdraw_user_moneyone_error.add(panel_withdraw_money_error);
-        withdraw_user_moneyone_error.add(btn_withdraw_money_error);
+        withdraw_user_moneyone_error.add(panel_withdraw_money_error_btn);
 
         atm.add(withdraw_user_moneyone_error);
         withdraw_user_moneyone_error.setVisible(false);
@@ -630,9 +634,13 @@ public class GUI {
 
 //출금 지폐 수 5만원권 부족 error / withdraw_user_moneyfive_error
         JPanel panel_withdraw_moneyfive_error = new JPanel();
+        JPanel panel_withdraw_moneyfive_error_btn = new JPanel();
+        JPanel panel_withdraw_moneyfive_error_label = new JPanel();
+        panel_withdraw_moneyfive_error_label.add(new JLabel("ERROR"));
         panel_withdraw_moneyfive_error.add(new JLabel("ATM에 5만원권이 부족합니다."));
 
         JButton btn_withdraw_moneyfive_error = new JButton("확인");
+        panel_withdraw_moneyfive_error_btn.add(btn_withdraw_moneyfive_error);
 
         btn_withdraw_moneyfive_error.addActionListener(new ActionListener() {
             @Override
@@ -641,18 +649,22 @@ public class GUI {
                 user_input.setVisible(true);
             }
         });
-        withdraw_user_moneyfive_error.add(new JLabel("ERROR"));
+        withdraw_user_moneyfive_error.add(panel_withdraw_moneyfive_error_label);
         withdraw_user_moneyfive_error.add(panel_withdraw_moneyfive_error);
-        withdraw_user_moneyfive_error.add(btn_withdraw_moneyfive_error);
+        withdraw_user_moneyfive_error.add(panel_withdraw_moneyfive_error_btn);
 
         atm.add(withdraw_user_moneyfive_error);
         withdraw_user_moneyfive_error.setVisible(false);
 
 //출금 잔고 부족 / withdraw_user_balance_error
         JPanel panel_withdraw_balance_error = new JPanel();
+        JPanel panel_withdraw_balance_error_label = new JPanel();
+        JPanel panel_withdraw_balance_error_btn = new JPanel();
+        panel_withdraw_balance_error_label.add(new JLabel("ERROR"));
         panel_withdraw_balance_error.add(new JLabel("계좌의 잔고가 부족합니다."));
 
         JButton btn_withdraw_balance_error = new JButton("확인");
+        panel_withdraw_balance_error_btn.add(btn_withdraw_balance_error);
         btn_withdraw_balance_error.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -661,9 +673,9 @@ public class GUI {
             }
         });
 
-        withdraw_user_balance_error.add(new JLabel("ERROR"));
+        withdraw_user_balance_error.add(panel_withdraw_balance_error_label);
         withdraw_user_balance_error.add(panel_withdraw_balance_error);
-        withdraw_user_balance_error.add(btn_withdraw_balance_error);
+        withdraw_user_balance_error.add(panel_withdraw_balance_error_btn);
 
         atm.add(withdraw_user_balance_error);
         withdraw_user_balance_error.setVisible(false);
